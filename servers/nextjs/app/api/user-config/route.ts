@@ -51,6 +51,8 @@ export async function POST(request: Request) {
     BEDROCK_AWS_SECRET_ACCESS_KEY: userConfig.BEDROCK_AWS_SECRET_ACCESS_KEY || existingConfig.BEDROCK_AWS_SECRET_ACCESS_KEY,
     BEDROCK_AWS_REGION: userConfig.BEDROCK_AWS_REGION || existingConfig.BEDROCK_AWS_REGION,
     BEDROCK_MODEL: userConfig.BEDROCK_MODEL || existingConfig.BEDROCK_MODEL,
+    // Nova Image Configuration
+    NOVAIMAGE_REGION: userConfig.NOVAIMAGE_REGION || existingConfig.NOVAIMAGE_REGION,
     PIXABAY_API_KEY:
       userConfig.PIXABAY_API_KEY || existingConfig.PIXABAY_API_KEY,
     IMAGE_PROVIDER: userConfig.IMAGE_PROVIDER || existingConfig.IMAGE_PROVIDER,

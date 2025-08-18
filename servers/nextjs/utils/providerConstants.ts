@@ -61,6 +61,15 @@ export const IMAGE_PROVIDERS: Record<string, ImageProviderOption> = {
     apiKeyField: "GOOGLE_API_KEY",
     apiKeyFieldLabel: "Google API Key"
   },
+  amazon_nova: {
+    value: "amazon_nova",
+    label: "Amazon Nova Canvas",
+    description: "Nova's primary image generation model",
+    icon: "/icons/nova.png",
+    requiresApiKey: true,
+    apiKeyField: "NOVA_API_KEY",
+    apiKeyFieldLabel: "Nova API Key"
+  }
 };
 
 export const LLM_PROVIDERS: Record<string, LLMProviderOption> = {

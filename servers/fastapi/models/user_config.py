@@ -36,6 +36,7 @@ class UserConfig(BaseModel):
     IMAGE_PROVIDER: Optional[str] = None
     PEXELS_API_KEY: Optional[str] = None
     PIXABAY_API_KEY: Optional[str] = None
+    NOVAIMAGE_REGION: Optional[str] = None
 
     # Reasoning
     TOOL_CALLS: Optional[bool] = None

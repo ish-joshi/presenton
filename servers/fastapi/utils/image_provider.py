@@ -23,6 +23,8 @@ def is_gemini_flash_selected() -> bool:
 def is_dalle3_selected() -> bool:
     return ImageProvider.DALLE3 == get_selected_image_provider()
 
+def is_nova_selected() -> bool:
+    return ImageProvider.NOVA == get_selected_image_provider()
 
 def get_selected_image_provider() -> ImageProvider | None:
     """

@@ -23,7 +23,7 @@ from utils.get_env import (
     get_pixabay_api_key_env,
     get_extended_reasoning_env,
     get_web_grounding_env, get_aws_region_env, get_aws_access_key_id_env, get_aws_secret_access_key_env,
-    get_bedrock_model_env,
+    get_bedrock_model_env, get_nova_image_region_env,
 )
 from utils.parsers import parse_bool_or_none
 from utils.set_env import (
@@ -46,6 +46,7 @@ from utils.set_env import (
     set_openai_api_key_env,
     set_openai_model_env,
     set_pexels_api_key_env,
+    set_nova_image_region_env,
     set_image_provider_env,
     set_pixabay_api_key_env,
     set_tool_calls_env,
@@ -87,6 +88,7 @@ def get_user_config():
         IMAGE_PROVIDER=existing_config.IMAGE_PROVIDER or get_image_provider_env(),
         PIXABAY_API_KEY=existing_config.PIXABAY_API_KEY or get_pixabay_api_key_env(),
         PEXELS_API_KEY=existing_config.PEXELS_API_KEY or get_pexels_api_key_env(),
+        NOVAIMAGE_REGION=existing_config.NOVAIMAGE_REGION or get_nova_image_region_env(),
         TOOL_CALLS=(
             existing_config.TOOL_CALLS
             if existing_config.TOOL_CALLS is not None
@@ -150,6 +152,8 @@ def update_env_with_user_config():
         set_pixabay_api_key_env(user_config.PIXABAY_API_KEY)
     if user_config.PEXELS_API_KEY:
         set_pexels_api_key_env(user_config.PEXELS_API_KEY)
+    if user_config.NOVAIMAGE_REGION:
+        set_nova_image_region_env(user_config.NOVAIMAGE_REGION)
     if user_config.TOOL_CALLS is not None:
         set_tool_calls_env(str(user_config.TOOL_CALLS))
     if user_config.DISABLE_THINKING is not None:

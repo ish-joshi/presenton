@@ -67,6 +67,8 @@ export const hasValidLLMConfig = (llmConfig: LLMConfig) => {
   console.log(`bedrock config: ${isBedrockConfigValid} with ${JSON.stringify(llmConfig)}`);
 
   const isImageConfigValid = () => {
+    console.log(llmConfig.IMAGE_PROVIDER);
+    console.log(llmConfig)
     switch (llmConfig.IMAGE_PROVIDER) {
       case "pexels":
         return llmConfig.PEXELS_API_KEY && llmConfig.PEXELS_API_KEY !== "";
@@ -76,6 +78,8 @@ export const hasValidLLMConfig = (llmConfig: LLMConfig) => {
         return llmConfig.OPENAI_API_KEY && llmConfig.OPENAI_API_KEY !== "";
       case "gemini_flash":
         return llmConfig.GOOGLE_API_KEY && llmConfig.GOOGLE_API_KEY !== "";
+      case "amazon_nova":
+        return llmConfig.BEDROCK_AWS_ACCESS_KEY_ID && llmConfig.BEDROCK_AWS_SECRET_ACCESS_KEY && llmConfig.NOVAIMAGE_REGION !== "";
       default:
         return false;
     }

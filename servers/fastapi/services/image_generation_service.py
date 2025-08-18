@@ -1,19 +1,24 @@
 import asyncio
+import base64
+import json
 import os
 import aiohttp
+import boto3
 from google import genai
 from google.genai.types import GenerateContentConfig
 from openai import AsyncOpenAI
 from models.image_prompt import ImagePrompt
 from models.sql.image_asset import ImageAsset
 from utils.download_helpers import download_file
-from utils.get_env import get_pexels_api_key_env
+from utils.get_env import get_pexels_api_key_env, get_aws_region_env, get_aws_access_key_id_env, \
+    get_aws_secret_access_key_env, get_nova_image_region_env
 from utils.get_env import get_pixabay_api_key_env
 from utils.image_provider import (
     is_pixels_selected,
     is_pixabay_selected,
     is_gemini_flash_selected,
     is_dalle3_selected,
+    is_nova_selected,
 )
 from utils.randomizers import get_random_uuid
 
@@ -33,6 +38,8 @@ class ImageGenerationService:
             return self.generate_image_google
         elif is_dalle3_selected():
             return self.generate_image_openai
+        elif is_nova_selected():
+            return self.generate_image_nova
         return None
 
     def is_stock_provider_selected(self):
@@ -128,3 +135,43 @@ class ImageGenerationService:
             data = await response.json()
             image_url = data["hits"][0]["largeImageURL"]
             return image_url
+
+    async def generate_image_nova(self, prompt: str, output_directory: str) -> str:
+        
+        client = boto3.client(
+            "bedrock-runtime",
+            region_name=get_nova_image_region_env(),
+            aws_access_key_id=get_aws_access_key_id_env(),
+            aws_secret_access_key=get_aws_secret_access_key_env(),
+        )
+
+        request_body = {
+            "taskType": "TEXT_IMAGE",
+            "textToImageParams": {"text": prompt},
+            "imageGenerationConfig": {
+                "numberOfImages": 1,  # same behavior as Google Gemini example
+                "width": 512,
+                "height": 512,
+            },
+        }
+        model_id = "amazon.nova-canvas-v1:0"
+
+        def _invoke():
+            request = json.dumps(request_body)
+            response = client.invoke_model(modelId=model_id, body=request)
+            return json.loads(response["body"].read())
+
+        # Run boto3 call in a background thread
+        model_response = await asyncio.to_thread(_invoke)
+
+        # Decode the first image
+        base64_image_data = model_response["images"][0]
+        image_data = base64.b64decode(base64_image_data)
+
+        image_path = os.path.join(output_directory, f"{get_random_uuid()}.png")
+        with open(image_path, "wb") as f:
+            f.write(image_data)
+
+        return image_path
+
+

@@ -43,6 +43,7 @@ export const updateLLMConfig = (
     bedrock_model: "BEDROCK_MODEL",
     bedrock_aws_access_key_id: "BEDROCK_AWS_ACCESS_KEY_ID",
     bedrock_aws_secret_access_key: "BEDROCK_AWS_SECRET_ACCESS_KEY",
+    nova_region: "NOVAIMAGE_REGION",
     pexels_api_key: "PEXELS_API_KEY",
     pixabay_api_key: "PIXABAY_API_KEY",
     image_provider: "IMAGE_PROVIDER",

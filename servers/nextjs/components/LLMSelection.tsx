@@ -25,6 +25,7 @@ import {
 import { IMAGE_PROVIDERS, LLM_PROVIDERS } from "@/utils/providerConstants";
 import { LLMConfig } from "@/types/llm_config";
 import BedrockConfig from "./BedrockConfig";
+import NovaConfig from "./NovaConfig";
 
 // Button state interface
 interface ButtonState {
@@ -304,6 +305,19 @@ export default function LLMProviderSelection({
 
             if (provider.value === "gemini_flash" && llmConfig.LLM === "google") {
               return <></>;
+            }
+
+            if (provider.value === "amazon_nova") {
+              return (
+                <NovaConfig
+                  novaRegion={llmConfig.NOVAIMAGE_REGION || ""}
+                  bedrockAwsRegion={llmConfig.BEDROCK_AWS_REGION}
+                  bedrockAwsAccessKeyId={llmConfig.BEDROCK_AWS_ACCESS_KEY_ID}
+                  bedrockAwsSecretAccessKey={llmConfig.BEDROCK_AWS_SECRET_ACCESS_KEY}
+                  llmProvider={llmConfig.LLM}
+                  onInputChange={input_field_changed}
+                />
+              );
             }
 
             // Show API key input for other providers

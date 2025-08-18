@@ -28,6 +28,9 @@ export interface LLMConfig {
   BEDROCK_AWS_ACCESS_KEY_ID?: string;
   BEDROCK_AWS_SECRET_ACCESS_KEY?: string;
 
+  // Nova Image
+  NOVAIMAGE_REGION?: string;
+
   // Image providers
   IMAGE_PROVIDER?: string;
   PEXELS_API_KEY?: string;

@@ -72,6 +72,8 @@ def set_bedrock_model_env(value):
 def set_pexels_api_key_env(value):
     os.environ["PEXELS_API_KEY"] = value
 
+def set_nova_image_region_env(value):
+    os.environ["NOVAIMAGE_REGION"] = value
 
 def set_image_provider_env(value):
     os.environ["IMAGE_PROVIDER"] = value

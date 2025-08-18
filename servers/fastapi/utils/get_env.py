@@ -92,6 +92,9 @@ def get_pexels_api_key_env():
 def get_image_provider_env():
     return os.getenv("IMAGE_PROVIDER")
 
+def get_nova_image_region_env():
+    return os.getenv("NOVAIMAGE_REGION")
+
 
 def get_pixabay_api_key_env():
     return os.getenv("PIXABAY_API_KEY")
