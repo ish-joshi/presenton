@@ -375,7 +375,9 @@ export default function LLMProviderSelection({
                         ? llmConfig.GOOGLE_MODEL ?? "xxxxx"
                         : llmConfig.LLM === "openai"
                           ? llmConfig.OPENAI_MODEL ?? "xxxxx"
-                          : "xxxxx"}{" "}
+                          : llmConfig.LLM === "bedrock"
+                            ? llmConfig.BEDROCK_MODEL ?? "xxxxx"
+                            : "xxxxx"}{" "}
                 for text generation and{" "}
                 {llmConfig.IMAGE_PROVIDER &&
                   IMAGE_PROVIDERS[llmConfig.IMAGE_PROVIDER]

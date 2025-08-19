@@ -57,7 +57,7 @@ class LLMToolCallsHandler:
         match self.client.llm_provider:
             case LLMProvider.OPENAI | LLMProvider.OLLAMA | LLMProvider.CUSTOM:
                 return self.parse_tool_openai(tool, strict)
-            case LLMProvider.ANTHROPIC:
+            case LLMProvider.ANTHROPIC | LLMProvider.BEDROCK:
                 return self.parse_tool_anthropic(tool)
             case LLMProvider.GOOGLE:
                 return self.parse_tool_google(tool)

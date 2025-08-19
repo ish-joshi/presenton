@@ -1,6 +1,5 @@
 import asyncio
 import json
-import boto3
 from typing import AsyncGenerator, List, Optional
 from fastapi import HTTPException
 from openai import AsyncOpenAI
@@ -183,7 +182,6 @@ class LLMClient:
                 status_code=400,
                 detail="AWS Secret Access Key is not set",
             )
-
         return AsyncAnthropicBedrock(
             aws_region=get_aws_region_env(),
             aws_access_key=get_aws_access_key_id_env(),

@@ -197,40 +197,22 @@ export default function BedrockConfig({
         </div>
       </div>
 
-      {/* Check for available models button */}
-      {(!modelsChecked || (modelsChecked && bedrockModels.length === 0)) && (
+      {/* Display currently selected model (if any) */}
+      {bedrockModel && (
         <div className="mb-4">
-          <button
-            onClick={fetchBedrockModels}
-            disabled={modelsLoading || !awsRegion || !awsAccessKeyId || !awsSecretAccessKey}
-            className={`w-full py-2.5 px-4 rounded-lg transition-all duration-200 border-2 ${modelsLoading || !awsRegion || !awsAccessKeyId || !awsSecretAccessKey
-              ? "bg-gray-100 border-gray-300 cursor-not-allowed text-gray-500"
-              : "bg-white border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-500/20"
-              }`}
-          >
-            {modelsLoading ? (
-              <div className="flex items-center justify-center gap-2">
-                <Loader2 className="w-4 h-4 animate-spin" />
-                Checking for models...
-              </div>
-            ) : (
-              "Check for available Bedrock models"
-            )}
-          </button>
-        </div>
-      )}
-
-      {/* Show message if no models found */}
-      {modelsChecked && bedrockModels.length === 0 && (
-        <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-          <p className="text-sm text-yellow-800">
-            No Bedrock models found. Please verify your AWS credentials and region.
-          </p>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Currently Selected Model
+          </label>
+          <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg flex justify-between items-center">
+            <p className="text-sm text-blue-800 font-medium">
+              {bedrockModel}
+            </p>
+          </div>
         </div>
       )}
 
       {/* Model selection dropdown */}
-      {modelsChecked && bedrockModels.length > 0 && (
+      {bedrockModels.length > 0 && (
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Select Bedrock Model
@@ -293,6 +275,38 @@ export default function BedrockConfig({
           </div>
         </div>
       )}
+
+      {/* Check for available models button - always shown */}
+      <div className="mb-4">
+        <button
+          onClick={fetchBedrockModels}
+          disabled={modelsLoading || !awsRegion || !awsAccessKeyId || !awsSecretAccessKey}
+          className={`w-full py-2.5 px-4 rounded-lg transition-all duration-200 border-2 ${modelsLoading || !awsRegion || !awsAccessKeyId || !awsSecretAccessKey
+            ? "bg-gray-100 border-gray-300 cursor-not-allowed text-gray-500"
+            : "bg-white border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-500/20"
+            }`}
+        >
+          {modelsLoading ? (
+            <div className="flex items-center justify-center gap-2">
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Checking for models...
+            </div>
+          ) : (
+            bedrockModels.length > 0 ? "Refresh available Bedrock models" : "Check for available Bedrock models"
+          )}
+        </button>
+      </div>
+
+      {/* Show message if no models found */}
+      {modelsChecked && bedrockModels.length === 0 && (
+        <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <p className="text-sm text-yellow-800">
+            No Bedrock models found. Please verify your AWS credentials and region.
+          </p>
+        </div>
+      )}
+
+      
     </div>
   );
 }
