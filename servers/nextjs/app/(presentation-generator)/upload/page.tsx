@@ -24,12 +24,12 @@ export const metadata: Metadata = {
     "business presentations",
   ],
   openGraph: {
-    title: "Create Data Presentation | PresentOn",
+    title: "Create Data Presentation | AgenticX",
     description:
       "Open-source AI presentation generator with custom layouts, multi-model support (OpenAI, Gemini, Ollama), and PDF/PPTX export. A free Gamma alternative.",
     type: "website",
     url: "https://presenton.ai/create",
-    siteName: "PresentOn",
+    siteName: "AgenticX",
   },
   twitter: {
     card: "summary_large_image",

@@ -64,11 +64,7 @@ export const hasValidLLMConfig = (llmConfig: LLMConfig) => {
     llmConfig.BEDROCK_AWS_REGION !== "" && 
     llmConfig.BEDROCK_MODEL !== "";
 
-  console.log(`bedrock config: ${isBedrockConfigValid} with ${JSON.stringify(llmConfig)}`);
-
   const isImageConfigValid = () => {
-    console.log(llmConfig.IMAGE_PROVIDER);
-    console.log(llmConfig)
     switch (llmConfig.IMAGE_PROVIDER) {
       case "pexels":
         return llmConfig.PEXELS_API_KEY && llmConfig.PEXELS_API_KEY !== "";

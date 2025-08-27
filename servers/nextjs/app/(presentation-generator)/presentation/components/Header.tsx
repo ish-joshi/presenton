@@ -223,18 +223,17 @@ const Header = ({
 
         <Announcement />
         <Wrapper className="flex items-center justify-between py-1">
-          <Link href="/dashboard" className="min-w-[162px]">
-            <img
-              className="h-16"
-              src="/logo-white.png"
-              alt="Presentation logo"
-            />
+          <Link href="/dashboard" className="flex items-center gap-2 group py-3">
+            <span
+                className="text-2xl font-extrabold tracking-tight text-white font-inter group-hover:opacity-90 transition-opacity">
+    Agentic<span className="text-primary-foreground">X</span>
+  </span>
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-4 2xl:gap-6">
             {isStreaming && (
-              <Loader2 className="animate-spin text-white font-bold w-6 h-6" />
+                <Loader2 className="animate-spin text-white font-bold w-6 h-6" />
             )}
 
 
